@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOOR. - Personal Book Library</title>
+  
+  <!-- Google Fonts & FontAwesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app-layout">
+
+    <!-- MOBILE OVERLAY -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-icon"><i class="fa-solid fa-layer-group"></i></div>
+        <h2>NOOR<span>.</span></h2>
+        <button class="mobile-close-btn" id="closeSidebarBtn"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <nav class="nav-menu">
+        <a href="#dashboard" class="nav-item active">
+          <i class="fa-solid fa-chart-pie"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="#my-books" class="nav-item">
+          <i class="fa-solid fa-book-bookmark"></i>
+          <span>My Books</span>
+        </a>
+        <a href="#categories" class="nav-item">
+          <i class="fa-solid fa-shapes"></i>
+          <span>Categories</span>
+        </a>
+        <a href="#borrow-history" class="nav-item">
+          <i class="fa-solid fa-clock-rotate-left"></i>
+          <span>Borrow History</span>
+        </a>
+      </nav>
+
+      <div class="user-profile">
+        <div class="avatar">N</div>
+        <div class="user-info">
+          <h4>Noor</h4>
+          <p>Library Manager</p>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+      
+      <!-- TOP BAR -->
+      <header class="top-header">
+        <div class="header-left">
+          <button class="mobile-menu-btn" id="openSidebarBtn">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <div>
+            <h1>Personal Book Library</h1>
+          </div>
+        </div>
+        <button class="btn btn-primary" id="openModalBtn">
+          <i class="fa-solid fa-plus"></i> <span>Add New Book</span>
+        </button>
+      </header>
+
+      <!-- STATS GRID -->
+      <section class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon indigo"><i class="fa-solid fa-book"></i></div>
+          <div>
+            <p>Total Books</p>
+            <h3 id="statTotal">0</h3>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon emerald"><i class="fa-solid fa-circle-check"></i></div>
+          <div>
+            <p>Available</p>
+            <h3 id="statAvailable">0</h3>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon amber"><i class="fa-solid fa-handshake"></i></div>
+          <div>
+            <p>Borrowed</p>
+            <h3 id="statBorrowed">0</h3>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon purple"><i class="fa-solid fa-folder-tree"></i></div>
+          <div>
+            <p>Categories</p>
+            <h3 id="statCategories">0</h3>
+          </div>
+        </div>
+      </section>
+
+      <!-- MY BOOKS SECTION -->
+      <section class="section-container" id="my-books">
+        <div class="section-header">
+          <div>
+            <h2>Books Collection</h2>
+            <p class="section-sub">Manage and track your reading inventory</p>
+          </div>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="filter-bar">
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="searchInput" placeholder="Search titles or authors...">
+          </div>
+
+          <div class="dropdowns">
+            <select id="categoryFilter">
+              <option value="All">All Categories</option>
+              <option value="Business">Business</option>
+              <option value="Self Development">Self Development</option>
+              <option value="Technology">Technology</option>
+              <option value="Fiction">Fiction</option>
+            </select>
+
+            <select id="statusFilter">
+              <option value="All">All Status</option>
+              <option value="Available">Available</option>
+              <option value="Borrowed">Borrowed</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Dynamic Grid -->
+        <div class="books-grid" id="booksGrid"></div>
+      </section>
+
+      <!-- CATEGORIES SECTION -->
+      <section class="section-container" id="categories">
+        <div class="section-header">
+          <div>
+            <h2>Categories</h2>
+            <p class="section-sub">Dynamic count per genre</p>
+          </div>
+        </div>
+
+        <div class="categories-grid" id="categoriesGrid"></div>
+      </section>
+
+      <!-- HISTORY SECTION -->
+      <section class="section-container" id="borrow-history">
+        <div class="section-header">
+          <div>
+            <h2>Borrowing Logs</h2>
+            <p class="section-sub">Real-time status tracking</p>
+          </div>
+        </div>
+
+        <div class="table-card">
+          <div class="table-responsive">
+            <table class="history-table">
+              <thead>
+                <tr>
+                  <th>Book</th>
+                  <th>Borrower</th>
+                  <th>Borrow Date</th>
+                  <th>Return Date</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="historyTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- MODAL -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Add New Book</h2>
+        <i class="fa-solid fa-xmark modal-close-icon" id="modalCloseIcon"></i>
+      </div>
+      <form id="addBookForm">
+        <div class="form-group">
+          <label>Book Title</label>
+          <input type="text" id="bookTitle" required placeholder="e.g. Clean Code">
+        </div>
+        <div class="form-group">
+          <label>Author</label>
+          <input type="text" id="bookAuthor" required placeholder="e.g. Robert C. Martin">
+        </div>
+        <div class="form-group">
+          <label>Cover Image URL (Optional)</label>
+          <input type="url" id="bookCover" placeholder="https://images.unsplash.com/...">
+        </div>
+        <div class="form-group">
+          <label>Category</label>
+          <select id="bookCategory">
+            <option value="Business">Business</option>
+            <option value="Self Development">Self Development</option>
+            <option value="Technology">Technology</option>
+            <option value="Fiction">Fiction</option>
+            <option value="Education">Education</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" id="closeModalBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Book</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
